@@ -4,10 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-///using ------->"TravelApi.Models;
+using ApiTemplate.Models;
 using Microsoft.OpenApi.Models;
 
-//namespace ------->"ProjectName.Solution
+namespace ApiTemplate.Solution
 {
     public class Startup
     {
@@ -36,11 +36,11 @@ using Microsoft.OpenApi.Models;
             services.AddControllers();
 
             services.AddEntityFrameworkMySql()
-                //.AddDbContext<------->"PROJECTNAMEContext>(options => options
+                .AddDbContext <ApiTemplateContext>(options => options
                 .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
             services.AddSwaggerGen(c =>
             {
-               // c.SwaggerDoc("v1", new OpenApiInfo { Title = "------->"ProjectName.Solution", Version = "v1" });
+               c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiTemplate.Solution", Version = "v1" });
             });
         }
 
@@ -51,7 +51,7 @@ using Microsoft.OpenApi.Models;
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-               // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", ------->"ProjectName.Solution v1"));
+               app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiTemplate.Solution v1"));
             }
 
             // app.UseHttpsRedirection();
